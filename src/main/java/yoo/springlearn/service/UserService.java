@@ -1,25 +1,17 @@
 package yoo.springlearn.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import yoo.springlearn.domain.UserVO;
 import yoo.springlearn.repository.UserRepository;
+import yoo.springlearn.repository.UserRepositoryImpl;
 
 /**
  * UserService
  */
 public class UserService {
     private final UserRepository userRepository = new UserRepositoryImpl();
-
-    /*
-        회원가입
-    */
-    public Long join(UserVO vo){
-        //중복회원 이름으로 체크
-        validateDuplicateUser(vo);
-        userRepository.insertUser(vo);
-        return vo.getSerialNo();    
-    }
 
     private void validateDuplicateUser(UserVO vo){
         //ifPresent는 null이 아닌 값이 있으면 동작한다.
@@ -29,12 +21,22 @@ public class UserService {
         });
     }
 
+    /*
+        회원가입
+    */
+    public Long join(UserVO vo){
+        //중복회원 이름으로 체크
+        validateDuplicateUser(vo);
+        userRepository.insertUser(vo);
+        return vo.getSerialNo();    
+    }   
+
     // 전체 회원 조회
     public List<UserVO> findMembers() {
         return userRepository.findAll();        
     }
 
-    public Optional<UserVO> findOne(Long seriaNo){
+    public Optional<UserVO> findOne(Long serialNo){
         return userRepository.findBySerialNo(serialNo);
     }
 }
