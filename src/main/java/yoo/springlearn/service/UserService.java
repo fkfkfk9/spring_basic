@@ -11,7 +11,11 @@ import yoo.springlearn.repository.UserRepositoryImpl;
  * UserService
  */
 public class UserService {
-    private final UserRepository userRepository = new UserRepositoryImpl();
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     private void validateDuplicateUser(UserVO vo){
         //ifPresent는 null이 아닌 값이 있으면 동작한다.
