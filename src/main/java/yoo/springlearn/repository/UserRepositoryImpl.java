@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import yoo.springlearn.domain.UserVO;
 
+@Repository
 public class UserRepositoryImpl implements UserRepository{
 
     private static Map<Long, UserVO> store = new HashMap<>();

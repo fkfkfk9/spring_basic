@@ -3,13 +3,15 @@ package yoo.springlearn.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import yoo.springlearn.domain.UserVO;
 import yoo.springlearn.repository.UserRepository;
-import yoo.springlearn.repository.UserRepositoryImpl;
 
 /**
  * UserService
  */
+@Service
 public class UserService {
     private final UserRepository userRepository;
 
