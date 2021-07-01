@@ -12,10 +12,21 @@ import yoo.springlearn.repository.UserRepository;
 /**
  * UserService
  */
-@Service
+//@Service 어노테이션을 사용하여 자동으로 의존관계를 설정한다.
 public class UserService {
-    private final UserRepository userRepository;
 
+    // 바로 주입하는 방법이 일반적으로 많이 쓰이지만 중간에 바꾸기 힘들다는 단점이 있다.
+    // @Autowired
+    // private UserRepository userRepository;
+
+    // Setter 방식이 있다. 중간에 누군가 사용할 수 있다는 단점이 있다.
+    // @Autowired
+    // public void setUserRepository(UserRepository userRepository){
+    //     this.userRepository = userRepository;
+    // }
+
+    private UserRepository userRepository;
+    //가장 추천하는 방식으로 생성자로 처음 생성시 셋팅해주고 다른곳에서 호출할 수 없다.
     @Autowired
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository;

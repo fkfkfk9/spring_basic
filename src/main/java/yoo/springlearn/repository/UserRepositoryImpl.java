@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import yoo.springlearn.domain.UserVO;
 
-@Repository
+//@Repository 어노테이션을 사용하여 스캔할 수 있도록 하고 의존관계를 설정한다.
 public class UserRepositoryImpl implements UserRepository{
 
     private static Map<Long, UserVO> store = new HashMap<>();

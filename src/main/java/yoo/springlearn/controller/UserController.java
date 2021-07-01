@@ -15,7 +15,7 @@ public class UserController {
         추가로 다른 패키지까지 빈으로 등록하려면 추가 설정이 필요하다.
         이런 빈들은 싱글톤 패턴으로 동록된다.
     */
-     private final UserService userService;
+     private UserService userService;
 
      @Autowired
      public UserController(UserService userService){
