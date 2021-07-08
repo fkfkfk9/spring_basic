@@ -3,7 +3,9 @@ package yoo.springlearn.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import yoo.springlearn.domain.UserVO;
 import yoo.springlearn.service.UserService;
 
 @Controller
@@ -26,5 +28,19 @@ public class UserController {
      @GetMapping("/users/join")
      public String joinForm(){
          return "users/createUserForm";
+     }
+
+     @PostMapping("/users/join")
+     public String join(UserForm form){
+         UserVO userVO = new UserVO();
+
+         userVO.setUserName(form.getName());
+         userVO.setUserAge(Integer.parseInt(form.getAge()));
+         userVO.setUserId(form.getId());
+         userVO.setUserMail(form.getMail());
+
+         userService.join(userVO);
+
+         return "redirect:/";
      }
 }
