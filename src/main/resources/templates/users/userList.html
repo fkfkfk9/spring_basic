@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User List</title>
+  </head>
+  <body>
+    <div>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>이름</th>
+              <th>나이</th>
+              <th>아이디</th>
+              <th>메일</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="user : ${users}">
+              <td th:text="${user.serialNo}"></td>
+              <td th:text="${user.userName}"></td>
+              <td th:text="${user.userAge}"></td>
+              <td th:text="${user.userId}"></td>
+              <td th:text="${user.userMail}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

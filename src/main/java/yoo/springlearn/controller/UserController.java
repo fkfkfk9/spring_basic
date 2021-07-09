@@ -1,7 +1,10 @@
 package yoo.springlearn.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -32,6 +35,10 @@ public class UserController {
 
      @PostMapping("/users/join")
      public String join(UserForm form){
+        /*
+            의아한건 VO가 있는데도 구지 Form객체를 생성하여 받아준다는 것이다.
+            보안을 위해서인지 모르겠으나 이로인해 매우 불편해지지 않나 싶기도하다.
+        */
          UserVO userVO = new UserVO();
 
          userVO.setUserName(form.getName());
@@ -42,5 +49,12 @@ public class UserController {
          userService.join(userVO);
 
          return "redirect:/";
+     }
+
+     @GetMapping("/users")
+     public String userList(Model model){
+         List<UserVO> users = userService.findMembers();
+        model.addAttribute("users", users);
+         return "users/userList";
      }
 }
