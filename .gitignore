@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+## DB접속정보 제거
+application.properties
