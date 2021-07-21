@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,26 +25,117 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public List<UserVO> findAll() {
-        // TODO Auto-generated method stub
-        return null;
+        String sql = "select * from user";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            List<UserVO> userList = new ArrayList<UserVO>();
+            while(rs.next()) {
+                UserVO vo = new UserVO();
+                vo.setSerialNo(rs.getLong("serialNo"));
+                vo.setUserName(rs.getString("userName"));
+                vo.setUserId(rs.getString("userId"));
+                vo.setUserMail(rs.getString("userMail"));
+                vo.setUserAge(rs.getInt("userAge"));   
+                userList.add(vo);
+            }
+            return userList;
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt, rs);
+        }
     }
 
     @Override
     public Optional<UserVO> findById(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        String sql = "select * from user where userId = ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                UserVO vo = new UserVO();
+                vo.setSerialNo(rs.getLong("serialNo"));
+                vo.setUserName(rs.getString("userName"));
+                vo.setUserId(rs.getString("userId"));
+                vo.setUserMail(rs.getString("userMail"));
+                vo.setUserAge(rs.getInt("userAge"));                
+                return Optional.of(vo);
+            } else {
+                return Optional.empty();
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt, rs);
+        }
     }
 
     @Override
     public Optional<UserVO> findByName(String name) {
-        // TODO Auto-generated method stub
-        return null;
+        String sql = "select * from user where userName = ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, name);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                UserVO vo = new UserVO();
+                vo.setSerialNo(rs.getLong("serialNo"));
+                vo.setUserName(rs.getString("userName"));
+                vo.setUserId(rs.getString("userId"));
+                vo.setUserMail(rs.getString("userMail"));
+                vo.setUserAge(rs.getInt("userAge"));                
+                return Optional.of(vo);
+            } else {
+                return Optional.empty();
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt, rs);
+        }
     }
 
     @Override
     public Optional<UserVO> findBySerialNo(long serialNo) {
-        // TODO Auto-generated method stub
-        return null;
+        String sql = "select * from user where serialNo = ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, serialNo);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                UserVO vo = new UserVO();
+                vo.setSerialNo(rs.getLong("serialNo"));
+                vo.setUserName(rs.getString("userName"));
+                vo.setUserId(rs.getString("userId"));
+                vo.setUserMail(rs.getString("userMail"));
+                vo.setUserAge(rs.getInt("userAge"));                
+                return Optional.of(vo);
+            } else {
+                return Optional.empty();
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        } finally {
+            close(conn, pstmt, rs);
+        }
     }
     
     @Override
@@ -52,7 +144,7 @@ public class JdbcUserRepository implements UserRepository{
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
-            conn = dataSource.getConnection();
+            conn = getConnection();
             pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, vo.getUserId());
             pstmt.setString(2, vo.getUserName());
@@ -65,6 +157,10 @@ public class JdbcUserRepository implements UserRepository{
         } finally {
             close(conn, pstmt);
         }
+    }
+
+    private Connection getConnection() {
+        return DataSourceUtils.getConnection(dataSource);
     }
     private void close(Connection conn, PreparedStatement pstmt, ResultSet rs){
         try {
