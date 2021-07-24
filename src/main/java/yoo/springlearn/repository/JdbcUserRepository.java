@@ -160,6 +160,8 @@ public class JdbcUserRepository implements UserRepository{
     }
 
     private Connection getConnection() {
+        //DataSourceUtils을 사용해주어야 트랜잭션같은 곳에서 문제가 생기지 않는다.
+        //아무래도 매번 데이터소스를 생성해주는게 아닌 하나의 데이터소스를 관리해주어야 여러 연결에서도 안전한듯 싶다.
         return DataSourceUtils.getConnection(dataSource);
     }
     private void close(Connection conn, PreparedStatement pstmt, ResultSet rs){

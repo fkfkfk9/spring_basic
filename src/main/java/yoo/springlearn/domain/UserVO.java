@@ -5,7 +5,7 @@ package yoo.springlearn.domain;
  */
 public class UserVO {
 
-    // ID, 유저넘버, 이름, 연락처, 나이, 메일주소
+    // ID, 유저넘버, 이름, 연락처, 나이, 메일주소 
     private String userId;
     private Long serialNo;
     private String userName;
