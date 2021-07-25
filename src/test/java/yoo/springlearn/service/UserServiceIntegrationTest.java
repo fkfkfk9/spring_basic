@@ -2,38 +2,23 @@ package yoo.springlearn.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import yoo.springlearn.domain.UserVO;
 import yoo.springlearn.repository.UserRepository;
-import yoo.springlearn.repository.UserRepositoryImpl;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class UserServiceTest {
+@SpringBootTest
+//테스트에 트렌젝션을 넣으면 DB의 데이터가 자동으로 삭제된다.
+@Transactional
+public class UserServiceIntegrationTest {
 
-    UserRepositoryImpl repository;
-    UserService userService;
-    
-    //@BeforeEach는 각각의 테스트가 실행되기전에 실행할 코드이고
-    //@AfterEach는 테스트가 실행 된 후 실행되는 코드이다.
-
-    @BeforeEach
-    public void beforeEach(){
-        repository = new UserRepositoryImpl();
-        userService = new UserService(repository);
-    }
-
-    @AfterEach
-    public void afterEach() {
-        repository.clearStore();
-    }
-
-    //테스트 코드는 한글로 적어도 상관없다.
-    //보통 테스트는 길어질 수 있으므로 주석으로 나눈다.
-    //given은 주어진것 when : 이걸 실행했을대 then : 결과가 이것이 나와야 한다.
+    @Autowired UserRepository repository;
+    @Autowired UserService userService;
 
     @Test
     void 회원가입(){
