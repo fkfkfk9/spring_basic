@@ -195,23 +195,6 @@ public class JdbcUserRepository implements UserRepository{
             e.printStackTrace();
         }
     }
-
-    private void close(Connection conn, PreparedStatement pstmt){
-        try {
-            if (pstmt != null) {
-                pstmt.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            if (conn != null) {
-                close(conn);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
         
     private void close(Connection conn) throws SQLException {
         DataSourceUtils.releaseConnection(conn, dataSource);

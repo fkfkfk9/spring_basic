@@ -30,19 +30,19 @@ public class JdbcTemplateUserRepository implements UserRepository{
 
     @Override
     public Optional<UserVO> findById(String id) {
-        List<UserVO> result = jdbcTemplate.query("select * from user where userId = ?", userRowMapper());
+        List<UserVO> result = jdbcTemplate.query("select * from user where userId = ?", userRowMapper(), id);
         return result.stream().findAny();
     }
 
     @Override
     public Optional<UserVO> findByName(String name) {
-        List<UserVO> result = jdbcTemplate.query("select * from user where userName = ?", userRowMapper());
+        List<UserVO> result = jdbcTemplate.query("select * from user where userName = ?", userRowMapper(), name);
         return result.stream().findAny();
     }
 
     @Override
     public Optional<UserVO> findBySerialNo(long serialNo) {
-        List<UserVO> result = jdbcTemplate.query("select * from user where serialNo = ?", userRowMapper());
+        List<UserVO> result = jdbcTemplate.query("select * from user where serialNo = ?", userRowMapper(), serialNo);
         return result.stream().findAny();
     }
     
