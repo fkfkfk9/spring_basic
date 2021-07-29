@@ -1,5 +1,6 @@
 package yoo.springlearn;
 
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import yoo.springlearn.repository.JdbcTemplateUserRepository;
 import yoo.springlearn.repository.JdbcUserRepository;
+import yoo.springlearn.repository.JpaUserRepository;
 import yoo.springlearn.repository.UserRepository;
 import yoo.springlearn.repository.UserRepositoryImpl;
 import yoo.springlearn.service.UserService;
@@ -15,11 +17,18 @@ import yoo.springlearn.service.UserService;
 @Configuration
 public class SpringConfig {
 
-    private DataSource dataSource;
+    // private DataSource dataSource;
+
+    // @Autowired
+    // public SpringConfig(DataSource dataSource){
+    //     this.dataSource = dataSource;
+    // }
+
+    private EntityManager em;
 
     @Autowired
-    public SpringConfig(DataSource dataSource){
-        this.dataSource = dataSource;
+    public SpringConfig(EntityManager em){
+        this.em = em;
     }
 
     // 자바파일을 통해 직접 Bean객체를 등록하는것이 가능하다.
@@ -36,6 +45,7 @@ public class SpringConfig {
         //인터페이스를 만들어 상속을 통해 작업했기 때문에
         //메모리 사용 방식에서 JDBC 사용 방식으로 손쉽게 변경할 수 있다.
         //return new JdbcUserRepository(dataSource);
-        return new JdbcTemplateUserRepository(dataSource);
+        //return new JdbcTemplateUserRepository(dataSource);
+        return new JpaUserRepository(em);
     }
 }

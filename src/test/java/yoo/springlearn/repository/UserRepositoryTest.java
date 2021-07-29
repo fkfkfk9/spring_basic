@@ -25,7 +25,6 @@ public class UserRepositoryTest {
         vo.setUserId("tester");
         vo.setUserMail("abc@naver.com");
         vo.setUserName("YOO");
-        vo.setUserPhone("111-222-3333");
 
         repository.insertUser(vo);
 
@@ -41,7 +40,6 @@ public class UserRepositoryTest {
         vo.setUserId("tester");
         vo.setUserMail("abc@naver.com");
         vo.setUserName("YOO");
-        vo.setUserPhone("111-222-3333");
 
         repository.insertUser(vo);
 
@@ -57,7 +55,6 @@ public class UserRepositoryTest {
         vo.setUserId("tester");
         vo.setUserMail("abc@naver.com");
         vo.setUserName("YOO");
-        vo.setUserPhone("111-222-3333");
 
         repository.insertUser(vo);
 
@@ -73,7 +70,6 @@ public class UserRepositoryTest {
         vo.setUserId("tester");
         vo.setUserMail("abc@naver.com");
         vo.setUserName("YOO");
-        vo.setUserPhone("111-222-3333");
 
         repository.insertUser(vo);
 
@@ -83,7 +79,6 @@ public class UserRepositoryTest {
         vo2.setUserId("tester2");
         vo2.setUserMail("abcdef@kakao.com");
         vo2.setUserName("Lee");
-        vo2.setUserPhone("334-123-3776");
 
         repository.insertUser(vo2);
 

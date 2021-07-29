@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import yoo.springlearn.domain.UserVO;
 import yoo.springlearn.repository.UserRepository;
@@ -13,6 +14,7 @@ import yoo.springlearn.repository.UserRepository;
  * UserService
  */
 //@Service 어노테이션을 사용하여 자동으로 의존관계를 설정한다.
+@Transactional//jpa사용시 트랜잭션 설정을 꼭 해주어야 한다.
 public class UserService {
 
     // 바로 주입하는 방법이 일반적으로 많이 쓰이지만 중간에 바꾸기 힘들다는 단점이 있다.
