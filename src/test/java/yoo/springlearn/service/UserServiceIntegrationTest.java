@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import yoo.springlearn.domain.UserVO;
-import yoo.springlearn.repository.UserRepository;
+//import yoo.springlearn.repository.UserRepository;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.*;
 @Transactional
 public class UserServiceIntegrationTest {
 
-    @Autowired UserRepository repository;
+    //@Autowired UserRepository repository;
     @Autowired UserService userService;
 
     @Test
