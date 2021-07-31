@@ -33,7 +33,6 @@ public class SpringConfig {
 
     private final UserRepository userRepository;
 
-    @Autowired
     public SpringConfig(UserRepository userRepository){
         this.userRepository = userRepository;
     }
