@@ -46,15 +46,36 @@ public class UserService {
         회원가입
     */
     public Long join(UserVO vo){
-        //중복회원 이름으로 체크
-        validateDuplicateUser(vo);
-        userRepository.insertUser(vo);
-        return vo.getSerialNo();    
+        //예를 들어 start와 end를 이용하여 메서드에 시간을 체크하는 기능을 추가했다고 해보자.
+        //모든 메서드에 이런 코드를 추가한다면 매우 힘들것이다. 특히 수정이라도 해야한다면
+        //이렇게 핵심기능이 아니면서도 공통적으로 사용하는 기능들이 있을 때 사용되는것이 AOP이다.
+        long start = System.currentTimeMillis();
+
+        try {
+            //중복회원 이름으로 체크
+            validateDuplicateUser(vo);
+            userRepository.insertUser(vo);
+            return vo.getSerialNo();
+        }finally {
+            long end = System.currentTimeMillis();
+            long timeMs = end - start;
+            System.out.println("join = " + timeMs + "ms");
+        }
+
     }   
 
     // 전체 회원 조회
     public List<UserVO> findMembers() {
-        return userRepository.findAll();        
+        long start = System.currentTimeMillis();
+
+        try {
+            return userRepository.findAll();
+        }finally {
+            long end = System.currentTimeMillis();
+            long timeMs = end - start;
+            System.out.println("join = " + timeMs + "ms");
+        }
+
     }
 
     public Optional<UserVO> findOne(Long serialNo){
