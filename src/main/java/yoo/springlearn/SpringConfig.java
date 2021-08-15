@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import yoo.springlearn.repository.JdbcTemplateUserRepository;
 //import yoo.springlearn.repository.JdbcUserRepository;
 //import yoo.springlearn.repository.JpaUserRepository;
+import yoo.springlearn.aop.TimeTraceAop;
 import yoo.springlearn.repository.SpringDataJpaUserRepository;
 import yoo.springlearn.repository.UserRepository;
 //import yoo.springlearn.repository.UserRepositoryImpl;
@@ -48,6 +49,12 @@ public class SpringConfig {
         //return new UserService(userRepository());
         return new UserService(userRepository);
     }
+
+    //만들어준 AOP는 이렇게 직접 Bean으로 등록할 수 있다.
+    /*@Bean
+    public TimeTraceAop timeTraceAop(){
+        return new TimeTraceAop();
+    }*/
 
 //    @Bean
 //    public UserRepository userRepository(){
